@@ -16,7 +16,7 @@ h1, h2{
     color: #fefae0;
 }
 
-p{
+.second-font{
     font-family: "Open Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300;
