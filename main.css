@@ -46,7 +46,6 @@ h2{
     height: 25vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin-top: 5rem;
     margin-left: 1em;
@@ -58,7 +57,7 @@ h2{
 
 #form-header{
     font-size: 2em;
-
+    margin-top: 1rem;
 }
 
 #user-input{
@@ -91,9 +90,10 @@ transition: all 300ms ease;
 /* LIST */
 #list{
 max-width: 100%;
-height: 50vh;
+min-height: 50vh;
 display: flex;
-justify-content: center;
+align-items: center;
+flex-direction: column;
 margin-top: 2em;
 margin-left: 1em;
 margin-right: 1em;
@@ -103,6 +103,22 @@ background-color: #ffc2d1;
 
 #list-header{
     font-size: 2em;
-    margin-top: 0.5em;
+    margin-top: 0.7em;
+}
+
+#list-card{
+    margin-top: 1.25em;
+    width: 100%;
+}
+
+.list-items{
+    display: block;
+    min-height: 2em;
+    padding-left: 1em;
+    border: 1px solid #ff8fab;
+    /* make font size bigger when working on responsivness */
+    font-size: 1.25em;
+    font-weight: 400; 
+    color: #fb6f92;
 }
 
