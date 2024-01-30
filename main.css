@@ -69,6 +69,12 @@ h2{
     border-radius: 1em;
 }
 
+#user-input:focus{
+    outline: none;
+    border: 1px solid #ffc2d1;
+    box-shadow: 0 0 15px #fb6f92;
+}
+
 #form-btn{
 width: 8em;
 height: 2em;
@@ -83,9 +89,9 @@ transition: all 300ms ease;
 }
 
 #form-btn:hover{
-    background-color: #606c38;
-    color: black;
-    border: 1px solid #283618;
+    background-color: #fb6f92;
+    color: whitesmoke;
+    border: 1px solid #ff8fab;
 }
 
 /* LIST */
