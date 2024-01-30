@@ -4,7 +4,9 @@ let userInput = document.getElementById('user-input')
 const formBtn = document.getElementById('form-btn')
 const formInput = document.getElementById('form-input')
 const listDiv = document.getElementById('list')
-const listUl = document.getElementById('list-card');
+const listUl = document.getElementById('list-card')
+let errMessage = document.getElementById('error-message');
+const errorEl = document.createElement('p');
 
 let listArr = [];
 
@@ -53,13 +55,30 @@ formBtn.addEventListener('click', function(event){
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.addItem(retrivedOjects);
 
-if (userInput.value == '') {
-    //error message
-}else{
-    return userInput.value = '';
-}
-})
+
+errorMessage();
+
+});
 
 //displays Items in DOM
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.displayItems(retrivedOjects);
+
+
+
+function errorMessage(){
+    if (userInput.value == '') {
+        errorEl.textContent = 'Fill in the feild!';
+        errorEl.classList.remove('hide');
+        errorEl.classList.add('error-message');
+        errorEl.classList.add('second-font');
+
+        formInput.appendChild(errorEl);
+        // errMessage.classList.remove('hide');
+        // errMessage.textContent = "Fill in the feild";
+    }else{
+        errorEl.classList.add('hide');
+        errorEl.remove("Fill in the feild");
+        return userInput.value = '';
+    }
+}
