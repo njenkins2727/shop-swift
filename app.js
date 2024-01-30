@@ -2,7 +2,7 @@
 const formDiv = document.getElementById('form')
 let userInput = document.getElementById('user-input')
 const formBtn = document.getElementById('form-btn')
-
+const formInput = document.getElementById('form-input')
 const listDiv = document.getElementById('list')
 const listUl = document.getElementById('list-card');
 
@@ -16,7 +16,7 @@ class Item {
     static displayItems(name){
         //add elements to make card 
         //loop through local sotrage array and append items into card 
-        for (let i = 0; i < name.length; i++) {
+        for (let i = 0; i < [name.length]; i++) {
             const element = name[i];
             const newEl = document.createElement('li');
             newEl.classList.add('list-items')
@@ -25,7 +25,6 @@ class Item {
         }
         
     }
-
     static addItem(name){
         //if item is or is not in array in local storage
             //append to list 
@@ -37,24 +36,30 @@ class Item {
     }
 }
 
-//add event listener for submit form 
+//Adds items to list
 formBtn.addEventListener('click', function(event){
     event.preventDefault();
     //Saves items to localstorage as an array 
-    if(typeof(Storage) !== "undefined") {
+    if(typeof(Storage) !== '') {
         if (localStorage.getItem('item') && localStorage.getItem('item').length > 0)
         listArr = JSON.parse(localStorage.getItem('item'));
     let dataObj = userInput.value;
     listArr.push(dataObj);
     localStorage.setItem('item', JSON.stringify(listArr));
-    
 } else {
     Error('Something went wrong.');
 }
+
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.addItem(retrivedOjects);
 
+if (userInput.value == '') {
+    //error message
+}else{
+    return userInput.value = '';
+}
 })
 
+//displays Items in DOM
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.displayItems(retrivedOjects);
