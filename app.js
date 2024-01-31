@@ -23,18 +23,21 @@ class Item {
             const newEl = document.createElement('li');
             newEl.classList.add('list-items')
             listUl.appendChild(newEl)
-            newEl.innerHTML = element;
+            newEl.innerHTML = element
         }
         
     }
     static addItem(name){
         //if item is or is not in array in local storage
             //append to list 
-            console.log(name[name.length - 1]);
-            const newEl = document.createElement('li');
-            newEl.classList.add('list-items');
-            listUl.appendChild(newEl)
-            newEl.innerHTML = name[name.length - 1];
+            if (name[name.length - 1] != '') {
+                const newEl = document.createElement('li');
+                newEl.classList.add('list-items');
+                listUl.appendChild(newEl)
+                newEl.innerHTML = name[name.length - 1];
+            }else{
+                errorMessage();
+            }
     }
 }
 
@@ -45,16 +48,15 @@ formBtn.addEventListener('click', function(event){
     if(typeof(Storage) !== '') {
         if (localStorage.getItem('item') && localStorage.getItem('item').length > 0)
         listArr = JSON.parse(localStorage.getItem('item'));
-    let dataObj = userInput.value;
-    listArr.push(dataObj);
-    localStorage.setItem('item', JSON.stringify(listArr));
-} else {
-    Error('Something went wrong.');
+        let dataObj = userInput.value;
+        listArr.push(dataObj);
+        localStorage.setItem('item', JSON.stringify(listArr));
+    } else {
+        Error('Something went wrong.');
 }
 
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.addItem(retrivedOjects);
-
 
 errorMessage();
 
@@ -64,8 +66,7 @@ errorMessage();
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.displayItems(retrivedOjects);
 
-
-
+//error message
 function errorMessage(){
     if (userInput.value == '') {
         errorEl.textContent = 'Fill in the feild!';
@@ -82,3 +83,4 @@ function errorMessage(){
         return userInput.value = '';
     }
 }
+
