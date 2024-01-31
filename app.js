@@ -9,11 +9,8 @@ let errMessage = document.getElementById('error-message');
 const errorEl = document.createElement('p');
 
 let listArr = [];
-// ADD DELETE BUTTON
-// const deleteBtn = document.createElement('button');
-// deleteBtn.classList.add('delete-button');
-// deleteBtn.innerHTML = 'X';
-//Make object instance class 
+let counter = 0;
+
 class Item {
     constructor(name){
         this.name = name;
@@ -26,11 +23,12 @@ class Item {
         for (let i = 0; i < [name.length]; i++) {
             const element = name[i];
             if (element != '') {
+                //DISPLAY ITEM CARDS
                 const newEl = document.createElement('li');
                 newEl.classList.add('list-items')
                 listUl.appendChild(newEl)
                 newEl.innerHTML = element
-
+                //DISPLAY DELETE BUTTON
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-button');
                 deleteBtn.innerHTML = 'X';
@@ -46,27 +44,34 @@ class Item {
         //if item is or is not in array in local storage
             //append to list 
             if (name[name.length - 1] != '') {
-                // CREATING CARD FOR ITEMS
+                // ADD ITEM CARDS
                 const newEl = document.createElement('li');
+                newEl.setAttribute('id', 'int-' + counter++);
                 newEl.classList.add('list-items');
                 listUl.appendChild(newEl);
                 newEl.innerHTML = name[name.length - 1];
-                
+
+                // ADD DELETE BUTTOND
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-button');
                 deleteBtn.innerHTML = 'X';
                 newEl.append(deleteBtn);
-                Item.deleteItem(deleteBtn);
+                Item.deleteItem(newEl);
+
             }else{
                 errorMessage();
             }
     }
+ 
 
-    static deleteItem(button){
-        button.addEventListener('click', function(event){
-            event.preventDefault();
-            console.log('working yay!');
-        })
+    static deleteItem(liItems){
+            liItems.addEventListener('click', function(event){
+                event.preventDefault();
+                const listItemId = event.currentTarget.getAttribute('id');
+                console.log('current target = '+ listItemId);
+                const elementId = document.getElementById(listItemId);
+                elementId.remove();
+            })
     }
     
 }
@@ -95,7 +100,6 @@ errorMessage();
 //displays Items in DOM
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.displayItems(retrivedOjects);
-// Item.deleteItem(deleteBtn);
 
 //error message
 function errorMessage(){
