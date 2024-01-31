@@ -129,6 +129,7 @@ background-color: #ffc2d1;
     color: #fb6f92;
 }
 
+/* ERROR MESSAGE */
 .hide{
     visibility: hidden;
 }
@@ -139,4 +140,23 @@ background-color: #ffc2d1;
     text-align: center;
     margin-bottom: -0.5em;
     margin-top: -0.5em;
+}
+
+/* DELETE BUTTON */
+
+.delete-button{
+    border: 0px;
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    display: flex;
+    float: right;
+    background-color: #ffc2d1;
+    color: #fb6f92;
+    font-size: 1em;
+}
+
+.delete-button:hover{
+    background-color: #fb6f92;
+    color: whitesmoke;
+    border: 1px solid #ff8fab;
 }

@@ -9,21 +9,36 @@ let errMessage = document.getElementById('error-message');
 const errorEl = document.createElement('p');
 
 let listArr = [];
-
+// ADD DELETE BUTTON
+// const deleteBtn = document.createElement('button');
+// deleteBtn.classList.add('delete-button');
+// deleteBtn.innerHTML = 'X';
 //Make object instance class 
 class Item {
     constructor(name){
         this.name = name;
     }
+
+    
     static displayItems(name){
         //add elements to make card 
         //loop through local sotrage array and append items into card 
         for (let i = 0; i < [name.length]; i++) {
             const element = name[i];
-            const newEl = document.createElement('li');
-            newEl.classList.add('list-items')
-            listUl.appendChild(newEl)
-            newEl.innerHTML = element
+            if (element != '') {
+                const newEl = document.createElement('li');
+                newEl.classList.add('list-items')
+                listUl.appendChild(newEl)
+                newEl.innerHTML = element
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.classList.add('delete-button');
+                deleteBtn.innerHTML = 'X';
+                newEl.append(deleteBtn);
+                Item.deleteItem(deleteBtn);
+            }else{
+                Error('Something went wrong');
+            }
         }
         
     }
@@ -31,14 +46,29 @@ class Item {
         //if item is or is not in array in local storage
             //append to list 
             if (name[name.length - 1] != '') {
+                // CREATING CARD FOR ITEMS
                 const newEl = document.createElement('li');
                 newEl.classList.add('list-items');
-                listUl.appendChild(newEl)
+                listUl.appendChild(newEl);
                 newEl.innerHTML = name[name.length - 1];
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.classList.add('delete-button');
+                deleteBtn.innerHTML = 'X';
+                newEl.append(deleteBtn);
+                Item.deleteItem(deleteBtn);
             }else{
                 errorMessage();
             }
     }
+
+    static deleteItem(button){
+        button.addEventListener('click', function(event){
+            event.preventDefault();
+            console.log('working yay!');
+        })
+    }
+    
 }
 
 //Adds items to list
@@ -65,6 +95,7 @@ errorMessage();
 //displays Items in DOM
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
 Item.displayItems(retrivedOjects);
+// Item.deleteItem(deleteBtn);
 
 //error message
 function errorMessage(){
