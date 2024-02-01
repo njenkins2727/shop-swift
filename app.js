@@ -25,15 +25,16 @@ class Item {
             if (element != '') {
                 //DISPLAY ITEM CARDS
                 const newEl = document.createElement('li');
-                newEl.classList.add('list-items')
-                listUl.appendChild(newEl)
+                newEl.setAttribute('id', counter++);
+                newEl.classList.add('list-items');
+                listUl.appendChild(newEl);
                 newEl.innerHTML = element
                 //DISPLAY DELETE BUTTON
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-button');
                 deleteBtn.innerHTML = 'X';
                 newEl.append(deleteBtn);
-                Item.deleteItem(deleteBtn);
+                Item.deleteItem(deleteBtn, newEl, name);
             }else{
                 Error('Something went wrong');
             }
@@ -46,17 +47,17 @@ class Item {
             if (name[name.length - 1] != '') {
                 // ADD ITEM CARDS
                 const newEl = document.createElement('li');
-                newEl.setAttribute('id', 'int-' + counter++);
+                newEl.setAttribute('id', counter++);
                 newEl.classList.add('list-items');
                 listUl.appendChild(newEl);
                 newEl.innerHTML = name[name.length - 1];
 
-                // ADD DELETE BUTTOND
+                // ADD DELETE BUTTON
                 const deleteBtn = document.createElement('button');
                 deleteBtn.classList.add('delete-button');
                 deleteBtn.innerHTML = 'X';
                 newEl.append(deleteBtn);
-                Item.deleteItem(newEl);
+                Item.deleteItem(deleteBtn, newEl, name);
 
             }else{
                 errorMessage();
@@ -64,13 +65,17 @@ class Item {
     }
  
 
-    static deleteItem(liItems){
-            liItems.addEventListener('click', function(event){
+    static deleteItem(deleteBtn, card, name){
+            deleteBtn.addEventListener('click', function(event){
                 event.preventDefault();
-                const listItemId = event.currentTarget.getAttribute('id');
-                console.log('current target = '+ listItemId);
-                const elementId = document.getElementById(listItemId);
-                elementId.remove();
+                //REMOVE CARD 
+                card.remove();
+                // LOCATING AND DELETING SPECIFIC ITEM FROM LOCALSTORAG
+                const listItemId = card.getAttribute('id');
+                let item = JSON.parse(localStorage.getItem('item'));
+                const locate = item.indexOf(name[listItemId]);
+                item.splice(locate, 1,);
+                localStorage.setItem('item', JSON.stringify(item))
             })
     }
     
@@ -80,14 +85,15 @@ class Item {
 formBtn.addEventListener('click', function(event){
     event.preventDefault();
     //Saves items to localstorage as an array 
-    if(typeof(Storage) !== '') {
+    if(userInput.value !== '') {
         if (localStorage.getItem('item') && localStorage.getItem('item').length > 0)
         listArr = JSON.parse(localStorage.getItem('item'));
         let dataObj = userInput.value;
         listArr.push(dataObj);
         localStorage.setItem('item', JSON.stringify(listArr));
     } else {
-        Error('Something went wrong.');
+        errorMessage();
+        return;
 }
 
 retrivedOjects = JSON.parse(localStorage.getItem('item'));
