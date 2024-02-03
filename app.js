@@ -18,11 +18,14 @@ class Item {
 
     
     static displayItems(name){
+        if (!localStorage.getItem('item')) {
+            return localStorage.setItem('item', JSON.stringify(listArr)); 
+        }
         //add elements to make card 
         //loop through local sotrage array and append items into card 
-        for (let i = 0; i < [name.length]; i++) {
+        for (let i = 0; i < name.length; i++) {
             const element = name[i];
-            if (element != '') {
+            if (element != null) {
                 //DISPLAY ITEM CARDS
                 const newEl = document.createElement('li');
                 newEl.setAttribute('id', counter++);
@@ -78,12 +81,17 @@ class Item {
                 localStorage.setItem('item', JSON.stringify(item))
             })
     }
+
+    static deleteAll(){
+        localStorage.clear();
+    }
     
 }
 
 //Adds items to list
 formBtn.addEventListener('click', function(event){
     event.preventDefault();
+    userInput.focus();
     //Saves items to localstorage as an array 
     if(userInput.value !== '') {
         if (localStorage.getItem('item') && localStorage.getItem('item').length > 0)
@@ -116,12 +124,31 @@ function errorMessage(){
         errorEl.classList.add('second-font');
 
         formInput.appendChild(errorEl);
-        // errMessage.classList.remove('hide');
-        // errMessage.textContent = "Fill in the feild";
+        
     }else{
         errorEl.classList.add('hide');
         errorEl.remove("Fill in the feild");
-        return userInput.value = '';
+        userInput.value = '';
+        return userInput.focus();
     }
 }
 
+// submit with enter 
+formInput.addEventListener('keydown', (event) => {
+    if(event.key === 'Enter'){
+        formBtn.click()
+        event.preventDefault()
+        return false
+    }
+  })
+
+userInput.focus();
+
+//   const clearBtn = document.getElementById('clear-btn');
+//   const listItems = document.getElementsByClassName('list-items');
+//   clearBtn.addEventListener('click', function(event){
+//     while( listUl.firstChild ){
+//         listUl.removeChild( listUl.firstChild );
+//     }
+//     localStorage.removeItem('item');
+//   })
