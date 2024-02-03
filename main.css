@@ -47,7 +47,7 @@ h2{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 5rem;
+    margin-top: 2.5em;
     margin-left: 1em;
     margin-right: 1em;
     background-color: #ffc2d1;
@@ -93,6 +93,9 @@ transition: all 300ms ease;
     color: whitesmoke;
     border: 1px solid #ff8fab;
 }
+#form-button:active{
+    color: aqua;
+}
 
 /* LIST */
 #list{
@@ -120,11 +123,11 @@ background-color: #ffc2d1;
 
 .list-items{
     display: block;
+    font-size: 1.5em;
     min-height: 2em;
     padding-left: 1em;
     border: 1px solid #ff8fab;
     /* make font size bigger when working on responsivness */
-    font-size: 1.25em;
     font-weight: 400; 
     color: #fb6f92;
 }
@@ -146,8 +149,8 @@ background-color: #ffc2d1;
 
 .delete-button{
     border: 0px;
-    margin-right: 0.5em;
-    margin-top: 0.5em;
+    margin-top: 0.2em;
+    margin-right: 1em;
     display: flex;
     float: right;
     background-color: #ffc2d1;
@@ -159,4 +162,69 @@ background-color: #ffc2d1;
     background-color: #fb6f92;
     color: whitesmoke;
     border: 1px solid #ff8fab;
+    cursor: pointer;
 }
+
+/* MEDIA QUERIES */
+
+/* xs */
+@media (min-width: 425px) {
+    #title{
+        font-size: 2em;
+    }
+    #list{
+        font-size: larger;
+    }
+    #form{
+        font-size: larger;
+    }
+    #list-card{
+        max-width: 400px;
+    }
+    #user-input{
+        height: 2.5em;
+    }
+    #form-btn{
+        height: 2.5em;
+    }
+
+}
+
+/* sm */
+@media (min-width: 640px) {
+    
+    #list{
+        font-size: x-large;
+        max-width: 600px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #form{
+        font-size: x-large;
+        max-width: 600px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #user-input{
+        height: 3em;
+    }
+    #form-btn{
+        height: 3em;
+    }
+}
+
+/* md */
+@media (min-width: 768px) {
+    #title{
+        font-size: 2.5em;
+    }
+}
+
+/* lg */
+@media (min-width: 1024px) {}
+
+/* xl */
+@media (min-width: 1280px) {}
+
+/* 2xl */
+@media (min-width: 1536px) {}
